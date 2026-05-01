@@ -30,6 +30,8 @@ const App = () => {
   );
 };
 
+export default App;
+
 const Root = () => {
   //Checking token existance in local storage
   const isAuthenticated = !!localStorage.getItem("token");
@@ -41,5 +43,3 @@ const Root = () => {
     <Navigate to="/login" />
   );
 };
-
-export default App;
