@@ -19,11 +19,11 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Root />}></Route>
-          <Route path="/Login" extract element={<Login />}></Route>
-          <Route path="/SignUp" extract element={<SignUp />}></Route>
-          <Route path="/Dashboard" extract element={<Home />}></Route>
-          <Route path="/expense" extract element={<Expense />}></Route>
-          <Route path="/income" extract element={<Income />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/dashboard" element={<Home />}></Route>
+          <Route path="/expense" element={<Expense />}></Route>
+          <Route path="/income" element={<Income />}></Route>
         </Routes>
       </Router>
     </div>

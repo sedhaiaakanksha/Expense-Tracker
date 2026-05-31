@@ -3,20 +3,41 @@ import Input from "../../components/Inputs/input";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useNavigate, Link } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
+import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("null");
+  const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("null");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   //Handle signUp Form submit
 
-  const handleSignUp = async (e) => {};
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    let profileImageUrl = "";
+
+    if (!fullName) {
+      setError("Please enter your full name");
+      return;
+    }
+    if (!validateEmail) {
+      setError("Please enter your email");
+      return;
+    }
+    if (!password) {
+      setError("Please enter your password");
+      return;
+    }
+    setError("");
+  };
+  // Sign Up API Call
+
   return (
     <div>
       <AuthLayout>
@@ -29,7 +50,13 @@ const SignUp = () => {
           </p>
 
           <form onSubmit={handleSignUp}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="mr-100px">
+              <ProfilePhotoSelector
+                image={profilePic}
+                setImage={setProfilePic}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-4 w-150">
               <Input
                 value={fullName}
                 onChange={({ target }) => setFullName(target.value)}
@@ -37,7 +64,6 @@ const SignUp = () => {
                 placeholder="John Doe"
                 type="text"
               />
-              <div className="row-span-2"></div>
               <Input
                 value={email}
                 onChange={({ target }) => setEmail(target.value)}
@@ -46,6 +72,7 @@ const SignUp = () => {
                 type="text"
               />
 
+              {/* <div className="row-span-3"> */}
               <Input
                 value={password}
                 onChange={({ target }) => setPassword(target.value)}
@@ -53,11 +80,26 @@ const SignUp = () => {
                 placeholder="Min 8 Characters"
                 type="password"
               />
+              {/* </div> */}
             </div>
+            {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
+            <div className="w-150">
+              <button type="submit" className="btn-primary">
+                SIGN UP
+              </button>
+            </div>
+
+            <p className="text-[13px] text-slate-800 mt-3">
+              Already have an account?{" "}
+              <Link className="font-medium text-primary underline" to="/login">
+                Login
+              </Link>
+            </p>
           </form>
         </div>
       </AuthLayout>
     </div>
   );
 };
+
 export default SignUp;
