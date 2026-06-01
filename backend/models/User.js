@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-const bcrypt = require("bcrypt.js");
+const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema(
   {
     fullName: { type: String, required: true },
-    email: { type: String, requires: true },
-    password: { type: String, requires: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
     profileImageUrl: { type: String, default: null },
   },
   { timestamps: true },
@@ -14,8 +14,14 @@ const UserSchema = new mongoose.Schema(
 
 //Hash password before saving
 
-UserSchema.pre("save", async function (next) {
-  if (!this.isDirectModified("password")) return next();
+UserSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
+
+//Compare Password
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+module.exports = mongoose.model("User", UserSchema);
