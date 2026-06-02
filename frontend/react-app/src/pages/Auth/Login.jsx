@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
 import axios from "axios";
 import axiosInstance from "../../utils/axiosInstance";
-import { API_Paths } from "../../utils/apiPaths";
+import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../../context/UserContext";
 
 const Login = () => {
@@ -34,7 +34,7 @@ const Login = () => {
 
     //Login API call
     try {
-      const response = await axiosInstance.post(API_Paths.AUTH.LOGIN, {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
         password,
       });

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Input from "../../components/Inputs/input";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useNavigate, Link } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
 import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import axiosInstance from "../../utils/axiosInstance";
-import { API_Paths } from "../../utils/apiPaths";
+import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../../context/UserContext";
+import uploadImage from "../../utils/uploadImage";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -16,7 +17,7 @@ const SignUp = () => {
 
   const [error, setError] = useState("");
 
-  const { updateUser } = UserContext(user);
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -44,7 +45,13 @@ const SignUp = () => {
     // Sign Up API Call
 
     try {
-      const response = await axiosInstance.post(API_Paths.AUTH.REGISTER, {
+      //Upload image if present
+      if (profilePic) {
+        const imageUploadRes = await uploadImage(profilePic);
+        profileImageUrl = imageUploadRes.imgUploadUrl || "";
+      }
+
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
         email,
         password,
