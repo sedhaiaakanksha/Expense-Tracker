@@ -3,6 +3,9 @@ import Input from "../../components/Inputs/input";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useNavigate, Link } from "react-router-dom";
 import { validateEmail } from "../../utils/helper";
+import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_Paths } from "../../utils/apiPaths";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +30,27 @@ const Login = () => {
     setError("");
 
     //Login API call
+    try {
+      const response = await axiosInstance.post(API_Paths.AUTH.LOGIN, {
+        email,
+        password,
+      });
+
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
   };
+
   return (
     <AuthLayout>
       <div className="lg:w-[70%] max-h-full flex flex-col justify-center mt-50">
