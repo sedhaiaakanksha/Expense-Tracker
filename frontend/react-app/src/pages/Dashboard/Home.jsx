@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import InfoCard from "../../components/Cards/InfoCard";
+import { addThousandSeparator } from "../../utils/helper";
 
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 
@@ -51,9 +52,28 @@ const Home = () => {
           <InfoCard
             icon={<IoMdCard />}
             label="Total Balance"
-            value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
+            value={addThousandSeparator(dashboardData?.totalBalance || 0)}
             color="bg-primary"
           />
+
+          <InfoCard
+            icon={<LuWalletMinimal />}
+            label="Total Income"
+            value={addThousandSeparator(dashboardData?.totalIncome || 0)}
+            color="bg-green-500"
+          />
+
+          <InfoCard
+            icon={<LuHandCoins />}
+            label="Total Expense"
+            value={addThousandSeparator(dashboardData?.totalExpense || 0)}
+            color="bg-red-500"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <RecentTransactions
+          transactions=
         </div>
       </div>
     </DashboardLayout>
