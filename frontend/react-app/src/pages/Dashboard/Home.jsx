@@ -6,10 +6,11 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import InfoCard from "../../components/Cards/InfoCard";
 import { addThousandSeparator } from "../../utils/helper";
-
+import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 
 import { IoMdCard } from "react-icons/io";
+import TransactionInfoCard from "../../components/Cards/TransactionInfoCard";
 
 const Home = () => {
   useUserAuth();
@@ -71,9 +72,11 @@ const Home = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-6">
           <RecentTransactions
-          transactions=
+            transactions={dashboardData?.recentTransactions}
+            onSeeMore={() => navigate("/expense")}
+          />
         </div>
       </div>
     </DashboardLayout>
