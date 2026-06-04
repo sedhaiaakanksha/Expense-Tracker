@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import axiosInstance from "../utils/axiosInstance";
 
+import { API_PATHS } from "../utils/apiPaths";
+
 export const useUserAuth = () => {
   const { user, updateUser, clearUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ export const useUserAuth = () => {
         const response = await axiosInstance.get(API_PATHS.AUTH.GET_USER_INFO);
 
         if (isMounted && response.data) {
-          uploadUser(response.data);
+          updateUser(response.data);
         }
       } catch (error) {
         console.error("Failed to fetch user info:", error);

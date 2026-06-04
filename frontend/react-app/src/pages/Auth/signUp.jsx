@@ -48,20 +48,22 @@ const SignUp = () => {
       //Upload image if present
       if (profilePic) {
         const imageUploadRes = await uploadImage(profilePic);
-        profileImageUrl = imageUploadRes.imgUploadUrl || "";
+        profileImageUrl =
+          imageUploadRes?.imageUrl || imageUploadRes?.profileImageUrl || "";
       }
 
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
         email,
         password,
+        profileImageUrl,
       });
-      const { token, user } = response.date;
+      const { token, user } = response.data;
 
       if (token) {
         localStorage.setItem("token", token);
         updateUser(user);
-        navigate("/dashboard");
+        navigate("/login");
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
