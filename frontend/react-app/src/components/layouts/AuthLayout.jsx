@@ -20,7 +20,7 @@ const AuthLayout = ({ children }) => {
         />
       </div>
 
-      <div className="grid grid-cols-1 z-20 h-12 absolute right-9 top-5 w-150">
+      <div className="grid grid-cols-1 z-20 h-12 absolute right-9 top-5 w-150 hidden md:block ">
         <StatsInfoCard
           icon={<LuTrendingUpDown />}
           label="Track Your Income & Expenses"
