@@ -74,7 +74,7 @@ const Home = () => {
           />
         </div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 justify-center items-center">
           <RecentTransactions
             transactions={dashboardData?.recentTransactions}
             onSeeMore={() => navigate("/expense")}
