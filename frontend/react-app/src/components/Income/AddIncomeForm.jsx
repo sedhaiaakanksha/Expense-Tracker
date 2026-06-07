@@ -21,14 +21,14 @@ const AddIncomeForm = ({ onAddIncome }) => {
       <Input
         value={income.source}
         onChange={({ target }) => handleChange("source", target.value)}
-        celabel="Income Source"
+        label="Income Source"
         placeholder="Freelance, Salary, etc"
         type="text"
       />
 
       <Input
         value={income.amount}
-        onChange={({ target }) => handleChange("amount", target.vale)}
+        onChange={({ target }) => handleChange("amount", target.value)}
         label="Amount"
         placeholder=""
         type="number"
