@@ -11,7 +11,7 @@ import {
   Cell,
 } from "recharts";
 
-const CustomBarChart = ({ data = [] }) => {
+const CustomBarChart = ({ data = [], dataKey = "category" }) => {
   //Function to alternate colors
   const getBarColor = (index) => {
     return index % 2 === 0 ? "#875cf5" : "#cfbefb";
@@ -22,7 +22,7 @@ const CustomBarChart = ({ data = [] }) => {
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
           <p className="text-xs font-semibold text-purple-800 mb-1 ">
-            {payload[0].payload.category}
+            {payload[0].payload[dataKey]}
           </p>
           <p className="text-sm text-gray-600">
             Amount:{" "}
@@ -42,7 +42,7 @@ const CustomBarChart = ({ data = [] }) => {
           <CartesianGrid stroke="none" />
 
           <XAxis
-            dataKey="category"
+            dataKey={dataKey}
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
