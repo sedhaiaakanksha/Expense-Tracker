@@ -5,6 +5,8 @@ import { API_PATHS } from "../../utils/apiPaths";
 import { toast } from "react-hot-toast";
 import axiosInstance from "../../utils/axiosInstance";
 import ExpenseOverview from "../../components/Expense/ExpenseOverview";
+import AddExpenseForm from "../../components/Expense/AddExpenseForm";
+import Modal from "../../components/layouts/Modal";
 
 const Expense = () => {
   useUserAuth();
@@ -16,7 +18,6 @@ const Expense = () => {
   });
 
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
-  useUserAuth();
 
   //Get all Income Details
   const fetchExpenseDetails = async () => {
@@ -88,7 +89,7 @@ const Expense = () => {
           <div className="">
             <ExpenseOverview
               transactions={expenseData}
-              omExpenseIncome={() => setOpenAddExpenseModal(true)}
+              onExpenseIncome={() => setOpenAddExpenseModal(true)}
             />
           </div>
         </div>
@@ -97,7 +98,9 @@ const Expense = () => {
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
           title="Add Expense"
-        ></Modal>
+        >
+          <AddExpenseForm onAddExpense={handleAddExpense} />
+        </Modal>
       </div>
     </DashboardLayout>
   );
