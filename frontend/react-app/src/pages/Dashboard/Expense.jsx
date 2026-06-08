@@ -92,6 +92,12 @@ const Expense = () => {
             />
           </div>
         </div>
+
+        <Modal
+          isOpen={openAddExpenseModal}
+          onClose={() => setOpenAddExpenseModal(false)}
+          title="Add Expense"
+        ></Modal>
       </div>
     </DashboardLayout>
   );
